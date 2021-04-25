@@ -1,18 +1,19 @@
 package com.mvvm.viewmodel;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.mvvm.model.Temperature;
 import com.mvvm.repository.TemperatureRepository;
 
-public class MainViewModel {
+public class MainViewModel extends ViewModel {
     TemperatureRepository repository;
 
     public MainViewModel() {
         repository = TemperatureRepository.getInstance();
     }
 
-    LiveData<Temperature> getLastTemperature() {
+    public LiveData<Temperature> getLastTemperature() {
         return repository.getLastTemperature();
     }
 

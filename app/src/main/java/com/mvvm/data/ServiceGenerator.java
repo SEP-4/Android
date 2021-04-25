@@ -22,7 +22,7 @@ public class ServiceGenerator {
     public static ITemperatureService getTemperatureService() {
         if (temperatureService == null) {
             temperatureService = new Retrofit.Builder()
-                    .baseUrl("https://temperature.co")
+                    .baseUrl("http://10.0.2.2:44390")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(ITemperatureService.class);

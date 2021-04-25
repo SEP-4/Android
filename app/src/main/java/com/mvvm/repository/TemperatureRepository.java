@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.mvvm.data.ServiceGenerator;
 import com.mvvm.data.temperatureService.ITemperatureService;
+import com.mvvm.data.temperatureService.TemperatureResponse;
 import com.mvvm.model.Temperature;
 
 import retrofit2.Call;
@@ -30,23 +31,25 @@ public class TemperatureRepository {
     }
 
     public LiveData<Temperature> getLastTemperature() {
+        System.out.println("RepositoryGetLastTmp: " + lastTemperature);
         return lastTemperature;
     }
     public void retrieveLastTemperature() {
         ITemperatureService temperatureService = ServiceGenerator.getTemperatureService();
-        Call<Temperature> call = temperatureService.getLastTemperature();
-        call.enqueue(new Callback<Temperature>() {
+        Call<TemperatureResponse> call = temperatureService.getLastTemperature();
+        call.enqueue(new Callback<TemperatureResponse>() {
             @EverythingIsNonNull
             @Override
-            public void onResponse(Call<Temperature> call, Response<Temperature> response) {
+            public void onResponse(Call<TemperatureResponse> call, Response<TemperatureResponse> response) {
                 if (response.isSuccessful()) {
-                    lastTemperature.setValue(response.body().getTemperatureObject());
+                    System.out.println("RepositoryOnResponse: " + response.body().getTemperature());
+                    lastTemperature.setValue(response.body().getTemperature());
                 }
             }
             @EverythingIsNonNull
             @Override
-            public void onFailure(Call<Temperature> call, Throwable t) {
-                Log.i("Retrofit", "Something went wrong :(");
+            public void onFailure(Call<TemperatureResponse> call, Throwable t) {
+                Log.i("Retrofit", "Something went wrong :(" + t);
             }
         });
     }

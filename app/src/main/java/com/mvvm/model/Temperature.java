@@ -3,18 +3,12 @@ package com.mvvm.model;
 import java.sql.Time;
 import java.util.Date;
 
-import retrofit2.http.POST;
-
 public class Temperature {
-    private int id;
-    private double temperature;
-    private Date date;
-    private Time time;
-    private int gymId;
-
-    public Temperature() {
-
-    }
+    private final int id;
+    private final double temperature;
+    private final Date date;
+    private final Time time;
+    private final int gymId;
 
     public Temperature(int id, double temperature, Date date, Time time, int gymId) {
         this.id = id;
@@ -31,39 +25,19 @@ public class Temperature {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public double getTemperature() {
         return temperature;
-    }
-
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public Time getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
-    }
-
     public int getGymId() {
         return gymId;
-    }
-
-    public void setGymId(int gymId) {
-        this.gymId = gymId;
     }
 }

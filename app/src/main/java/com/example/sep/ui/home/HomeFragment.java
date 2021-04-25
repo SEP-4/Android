@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sep.R;
 import com.example.sep.ui.gallery.GalleryViewModel;
+import com.mvvm.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
 
@@ -25,15 +26,26 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView_info;
     private ArrayList<Info> infos;
     private HomeViewModel homeViewModel;
+    private MainViewModel mainViewModel;
     HomeAdapter homeAdapter;
+    private TextView tmpTextView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        recyclerView_info = root.findViewById(R.id.recycleview_Info);
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.getInfoLiveData().observe((LifecycleOwner) getContext(), infoListUpdateObserver);
+        tmpTextView = root.findViewById(R.id.tmp);
+        //recyclerView_info = root.findViewById(R.id.recycleview_Info);
+        //homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel.retrieveLastTemperature();
+        mainViewModel.getLastTemperature().observe(this.getViewLifecycleOwner(), temperature -> {
+            tmpTextView.setText(temperature.toString());
+            System.out.println("tmppp:" + temperature.toString());
+        });
+
+        //homeViewModel.getInfoLiveData().observe((LifecycleOwner) getContext(), infoListUpdateObserver);
+
 
         return root;
     }
