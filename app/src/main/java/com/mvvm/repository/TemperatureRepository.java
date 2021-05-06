@@ -42,10 +42,11 @@ public class TemperatureRepository {
             @Override
             public void onResponse(Call<TemperatureResponse> call, Response<TemperatureResponse> response) {
                 if (response.isSuccessful()) {
-                    System.out.println("RepositoryOnResponse: " + response.body().getTemperature());
+                    Log.i("Retrofit: " , " " +response.body().getTemperature());
                     lastTemperature.setValue(response.body().getTemperature());
                 }
             }
+
             @EverythingIsNonNull
             @Override
             public void onFailure(Call<TemperatureResponse> call, Throwable t) {

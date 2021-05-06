@@ -13,7 +13,9 @@ public class MainViewModel extends ViewModel {
         repository = TemperatureRepository.getInstance();
     }
 
-    public LiveData<Temperature> getLastTemperature() {
+    public LiveData<Temperature> getLastTemperature()
+    {
+        System.out.println("LiveData<Temperature> getLastTemperature()" +repository.getLastTemperature().getValue());
         return repository.getLastTemperature();
     }
 

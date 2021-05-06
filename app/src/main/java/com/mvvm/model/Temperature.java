@@ -10,7 +10,7 @@ public class Temperature {
     private final Time time;
     private final int gymId;
 
-    public Temperature(int id, double temperature, Date date, Time time, int gymId) {
+    public Temperature(int id, int gymId, double temperature, Date date, Time time) {
         this.id = id;
         this.temperature = temperature;
         this.date = date;
@@ -18,7 +18,7 @@ public class Temperature {
         this.gymId = gymId;
     }
     public Temperature getTemperatureObject(){
-        return new Temperature(id,temperature,date,time,gymId);
+        return new Temperature(id, gymId, temperature, date, time);
     }
 
     public int getId() {

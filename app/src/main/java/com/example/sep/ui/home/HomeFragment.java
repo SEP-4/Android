@@ -7,16 +7,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sep.R;
-import com.example.sep.ui.gallery.GalleryViewModel;
+import com.mvvm.viewmodel.HomeViewModel;
 import com.mvvm.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -40,7 +38,7 @@ public class HomeFragment extends Fragment {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         mainViewModel.retrieveLastTemperature();
         mainViewModel.getLastTemperature().observe(this.getViewLifecycleOwner(), temperature -> {
-            tmpTextView.setText(temperature.toString());
+            tmpTextView.setText(String.valueOf(temperature.getTemperature()));
             System.out.println("tmppp:" + temperature.toString());
         });
 

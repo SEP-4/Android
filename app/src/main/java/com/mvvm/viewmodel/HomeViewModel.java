@@ -1,10 +1,11 @@
-package com.example.sep.ui.home;
+package com.mvvm.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.sep.R;
+import com.example.sep.ui.home.Info;
 import com.mvvm.model.Temperature;
 import com.mvvm.repository.TemperatureRepository;
 
