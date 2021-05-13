@@ -1,40 +1,36 @@
 package com.example.sep.model;
 
 public class Gym {
-    private int id;
-    private int climateSettingId;
+    private int gym_ID;
+    //private int climateSettingId;
     private String address;
     private String contact;
     private int postCode;
     private String city;
+    private String email;
+    private String password;
 
     public Gym() {
     }
 
-    public Gym(int id, int climateSettingId, String address, String contact, int postCode, String city) {
-        this.id = id;
-        this.climateSettingId = climateSettingId;
+    public Gym(int gym_ID, String address, String contact, int postCode, String city, String email, String password) {
+        this.gym_ID = gym_ID;
         this.address = address;
         this.contact = contact;
         this.postCode = postCode;
         this.city = city;
+        this.email = email;
+        this.password = password;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getClimateSettingId() {
-        return climateSettingId;
-    }
-
-    public void setClimateSettingId(int climateSettingId) {
-        this.climateSettingId = climateSettingId;
-    }
+//    public int getClimateSettingId() {
+//        return climateSettingId;
+//    }
+//
+//    public void setClimateSettingId(int climateSettingId) {
+//        this.climateSettingId = climateSettingId;
+//    }
 
     public String getAddress() {
         return address;
@@ -66,5 +62,29 @@ public class Gym {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public int getGym_ID() {
+        return gym_ID;
+    }
+
+    public void setGym_ID(int gym_ID) {
+        this.gym_ID = gym_ID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
