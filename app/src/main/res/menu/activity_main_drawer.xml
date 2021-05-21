@@ -10,12 +10,20 @@
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:icon="@drawable/thermostat_icon"
+            android:title="Temperature" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:icon="@drawable/cloud_co2_icon"
+            android:title="CO2" />
+        <item
+            android:id="@+id/nav_humidity"
+            android:icon="@drawable/humidity_icon"
+            android:title="Humidity" />
+        <item
+            android:id="@+id/nav_remoteController"
+            android:icon="@drawable/ic_remote"
+            android:title="@string/controller" />
     </group>
 
     <item android:title="Contact">
@@ -25,6 +33,5 @@
                 android:icon="@drawable/ic_call"
                 android:title="+45 69 69 69 69" />
         </menu>
-
     </item>
 </menu>
