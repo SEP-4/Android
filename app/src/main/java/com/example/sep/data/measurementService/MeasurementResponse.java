@@ -16,6 +16,7 @@ public class MeasurementResponse {
 
     public Measurement getMeasurement(){
         MeasurementTime measurementTime = new MeasurementTime(measurement_ID,gym_ID,temperature, humidity, cO2Level, date, time);
+        System.out.println("Response temp: "+new Measurement(measurement_ID, gym_ID, temperature, humidity, cO2Level, date, new Time(measurementTime.getTime())));
         return new Measurement(measurement_ID, gym_ID, temperature, humidity, cO2Level, date, new Time(measurementTime.getTime()));
     }
 }
