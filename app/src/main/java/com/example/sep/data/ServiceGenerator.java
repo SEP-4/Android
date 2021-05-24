@@ -7,10 +7,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import com.example.sep.data.gymService.IGymService;
 import com.example.sep.data.measurementService.IMeasurementService;
+import com.example.sep.data.remoteControllerService.IRemoteControllerService;
 
 public class ServiceGenerator {
     private static IGymService gymService;
     private static IMeasurementService measurementService;
+    private static IRemoteControllerService remoteControllerService;
 
     public static IGymService getGymsService() {
         if (gymService == null) {
@@ -35,6 +37,18 @@ public class ServiceGenerator {
         System.out.println("tmpService: " + measurementService);
         System.out.println("Network" + NetworkSecurityPolicy.getInstance().isCleartextTrafficPermitted());
         return measurementService;
+    }
+
+    public static IRemoteControllerService getRemoteControllerService() {
+        if (remoteControllerService == null) {
+            remoteControllerService = new Retrofit.Builder()
+                    .baseUrl("http://sep4webservice-prod.us-east-1.elasticbeanstalk.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                    .create(IRemoteControllerService.class);
+
+        }
+        return remoteControllerService;
     }
 
 }

@@ -7,7 +7,7 @@ import com.example.sep.model.Measurement;
 import com.example.sep.repository.MeasurementRepository;
 
 public class HomeViewModel extends ViewModel {
-    MeasurementRepository repository;
+    private MeasurementRepository repository;
 
     public HomeViewModel() {
         repository = MeasurementRepository.getInstance();

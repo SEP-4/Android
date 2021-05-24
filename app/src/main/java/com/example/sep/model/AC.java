@@ -5,12 +5,23 @@ public class AC {
     private int gymId;
     private int state;
     private double targetTemperature;
+    private String message;
 
     public AC(int id, int gymId, int state, double targetTemperature) {
         this.id = id;
         this.gymId = gymId;
         this.state = state;
         this.targetTemperature = targetTemperature;
+    }
+
+    public AC(int id, int state, double targetTemperature) {
+        this.id = id;
+        this.state = state;
+        this.targetTemperature = targetTemperature;
+    }
+
+    public AC(String message) {
+        this.message = message;
     }
 
     public AC() {
@@ -42,6 +53,14 @@ public class AC {
 
     public double getTargetTemperature() {
         return targetTemperature;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public void setTargetTemperature(double targetTemperature) {

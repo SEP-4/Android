@@ -4,6 +4,7 @@ public class Humidifier {
     private int id;
     private int gymId;
     private int state;
+    private String message;
 
     public Humidifier() {
     }
@@ -12,6 +13,15 @@ public class Humidifier {
         this.id = id;
         this.gymId = gymId;
         this.state = state;
+    }
+
+    public Humidifier(int id, int state) {
+        this.id = id;
+        this.state = state;
+    }
+
+    public Humidifier(String message) {
+        this.message = message;
     }
 
     public int getId() {
@@ -36,5 +46,13 @@ public class Humidifier {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
