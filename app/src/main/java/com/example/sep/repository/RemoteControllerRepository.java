@@ -80,8 +80,47 @@ public class RemoteControllerRepository {
         });
     }
 
+    public void turnOnAutomationAC(){
+        IRemoteControllerService remoteControllerService = ServiceGenerator.getRemoteControllerService();
+        Call<RemoteControllerResponse> call = remoteControllerService.turnAutomationOnAC();
+
+
+        call.enqueue(new Callback<RemoteControllerResponse>() {
+            @EverythingIsNonNull
+            @Override
+            public void onResponse(Call<RemoteControllerResponse> call, Response<RemoteControllerResponse> response) {
+                if (response.isSuccessful()) {
+                    response.body().turnOnAutomationAC();
+                }
+            }
+            @EverythingIsNonNull
+            @Override
+            public void onFailure(Call<RemoteControllerResponse> call, Throwable t) {
+                Log.i("Retrofit", "Something went wrong :(");
+            }
+        });
+    }
+
+    public void turnOffAutomationAC(){
+        IRemoteControllerService remoteControllerService = ServiceGenerator.getRemoteControllerService();
+        Call<RemoteControllerResponse> call = remoteControllerService.turnAutomationOffAC();
+        call.enqueue(new Callback<RemoteControllerResponse>() {
+            @EverythingIsNonNull
+            @Override
+            public void onResponse(Call<RemoteControllerResponse> call, Response<RemoteControllerResponse> response) {
+                if (response.isSuccessful()) {
+                    response.body().turnOffAutomationAC();
+                }
+            }
+            @EverythingIsNonNull
+            @Override
+            public void onFailure(Call<RemoteControllerResponse> call, Throwable t) {
+                Log.i("Retrofit", "Something went wrong :(");
+            }
+        });
+    }
+
     public void getInitialACState(){
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         IRemoteControllerService remoteControllerService = ServiceGenerator.getRemoteControllerService();
         Call<RemoteControllerResponse> call = remoteControllerService.getInitialStateAC();
         call.enqueue(new Callback<RemoteControllerResponse>() {
@@ -139,6 +178,46 @@ public class RemoteControllerRepository {
             public void onResponse(Call<RemoteControllerResponse> call, Response<RemoteControllerResponse> response) {
                 if (response.isSuccessful()) {
                     response.body().closeWindow();
+                }
+            }
+            @EverythingIsNonNull
+            @Override
+            public void onFailure(Call<RemoteControllerResponse> call, Throwable t) {
+                Log.i("Retrofit", "Something went wrong :(");
+            }
+        });
+    }
+
+    public void openWindowAutomation(){
+        IRemoteControllerService remoteControllerService = ServiceGenerator.getRemoteControllerService();
+        Call<RemoteControllerResponse> call = remoteControllerService.openWindowAutomation();
+
+
+        call.enqueue(new Callback<RemoteControllerResponse>() {
+            @EverythingIsNonNull
+            @Override
+            public void onResponse(Call<RemoteControllerResponse> call, Response<RemoteControllerResponse> response) {
+                if (response.isSuccessful()) {
+                    response.body().openWindowAutomation();
+                }
+            }
+            @EverythingIsNonNull
+            @Override
+            public void onFailure(Call<RemoteControllerResponse> call, Throwable t) {
+                Log.i("Retrofit", "Something went wrong :(");
+            }
+        });
+    }
+
+    public void closeWindowAutomation(){
+        IRemoteControllerService remoteControllerService = ServiceGenerator.getRemoteControllerService();
+        Call<RemoteControllerResponse> call = remoteControllerService.closeWindowAutomation();
+        call.enqueue(new Callback<RemoteControllerResponse>() {
+            @EverythingIsNonNull
+            @Override
+            public void onResponse(Call<RemoteControllerResponse> call, Response<RemoteControllerResponse> response) {
+                if (response.isSuccessful()) {
+                    response.body().closeWindowAutomation();
                 }
             }
             @EverythingIsNonNull
@@ -215,6 +294,46 @@ public class RemoteControllerRepository {
         });
     }
 
+    public void turnOnAutomationHumidifier(){
+        IRemoteControllerService remoteControllerService = ServiceGenerator.getRemoteControllerService();
+        Call<RemoteControllerResponse> call = remoteControllerService.turnOnAutomationHumidifier();
+
+
+        call.enqueue(new Callback<RemoteControllerResponse>() {
+            @EverythingIsNonNull
+            @Override
+            public void onResponse(Call<RemoteControllerResponse> call, Response<RemoteControllerResponse> response) {
+                if (response.isSuccessful()) {
+                    response.body().turnOnAutomationHumidifier();
+                }
+            }
+            @EverythingIsNonNull
+            @Override
+            public void onFailure(Call<RemoteControllerResponse> call, Throwable t) {
+                Log.i("Retrofit", "Something went wrong :(");
+            }
+        });
+    }
+
+    public void turnOffAutomationHumidifier(){
+        IRemoteControllerService remoteControllerService = ServiceGenerator.getRemoteControllerService();
+        Call<RemoteControllerResponse> call = remoteControllerService.turnOffAutomationHumidifier();
+        call.enqueue(new Callback<RemoteControllerResponse>() {
+            @EverythingIsNonNull
+            @Override
+            public void onResponse(Call<RemoteControllerResponse> call, Response<RemoteControllerResponse> response) {
+                if (response.isSuccessful()) {
+                    response.body().turnOffAutomationHumidifier();
+                }
+            }
+            @EverythingIsNonNull
+            @Override
+            public void onFailure(Call<RemoteControllerResponse> call, Throwable t) {
+                Log.i("Retrofit", "Something went wrong :(");
+            }
+        });
+    }
+
     public void getInitialHumidifierState(){
         IRemoteControllerService remoteControllerService = ServiceGenerator.getRemoteControllerService();
         Call<RemoteControllerResponse> call = remoteControllerService.getInitialStateHumidifier();
@@ -233,6 +352,8 @@ public class RemoteControllerRepository {
             }
         });
     }
+
+
 
     public LiveData<Humidifier> getHumidifierState() {
         return humidifier;

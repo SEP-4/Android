@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_co2" />
     <fragment
         android:id="@+id/nav_remoteController"
-        android:name="com.example.sep.ui.remorteController.RemoteControllerFragment"
+        android:name="com.example.sep.ui.fragment.RemoteControllerFragment"
         android:label="Controller"
         tools:layout="@layout/remote_controller_fragment" />
 </navigation>

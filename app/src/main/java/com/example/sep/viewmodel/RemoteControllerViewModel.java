@@ -32,6 +32,14 @@ public class RemoteControllerViewModel extends ViewModel {
         repository.turnOffAC();
     }
 
+    public void turnOnAutomationAC(){
+        repository.turnOnAutomationAC();
+    }
+
+    public void turnOffAutomationAC(){
+        repository.turnOffAutomationAC();
+    }
+
     //Window
     public LiveData<Window> getWindowState(){
         return repository.getWindowState();
@@ -49,6 +57,14 @@ public class RemoteControllerViewModel extends ViewModel {
         repository.closeWindow();
     }
 
+    public void openWindowAutomation(){
+        repository.openWindowAutomation();
+    }
+
+    public void closeWindowAutomation(){
+        repository.closeWindowAutomation();
+    }
+
     //Humidifier
     public LiveData<Humidifier> getHumidifierState(){
         return repository.getHumidifierState();
@@ -64,5 +80,13 @@ public class RemoteControllerViewModel extends ViewModel {
 
     public void turnOffHumidifier(){
         repository.turnOffHumidifier();
+    }
+
+    public void turnOnAutomationHumidifier(){
+        repository.turnOnAutomationHumidifier();
+    }
+
+    public void turnOffAutomationHumidifier(){
+        repository.turnOffAutomationHumidifier();
     }
 }

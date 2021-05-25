@@ -9,9 +9,10 @@ public class RemoteControllerResponse {
     private int state;
     private int targetTemperature;
     private String message;
+    private int automation;
 
     public AC getACState(){
-        return new AC(gym_ID, state, targetTemperature);
+        return new AC(gym_ID, state, targetTemperature, automation);
     }
 
     public AC turnOffAC(){
@@ -19,6 +20,14 @@ public class RemoteControllerResponse {
     }
 
     public AC turnOnAC(){
+        return new AC(message);
+    }
+
+    public AC turnOffAutomationAC(){
+        return new AC(message);
+    }
+
+    public AC turnOnAutomationAC(){
         return new AC(message);
     }
 
@@ -30,8 +39,16 @@ public class RemoteControllerResponse {
         return new Window(message);
     }
 
+    public Window openWindowAutomation(){
+        return new Window(message);
+    }
+
+    public Window closeWindowAutomation(){
+        return new Window(message);
+    }
+
     public Window getWindowState(){
-        return new Window(gym_ID, state);
+        return new Window(gym_ID, state, automation);
     }
 
     public Humidifier turnOnHumidifier(){
@@ -42,7 +59,15 @@ public class RemoteControllerResponse {
         return new Humidifier(message);
     }
 
+    public Humidifier turnOnAutomationHumidifier(){
+        return new Humidifier(message);
+    }
+
+    public Humidifier turnOffAutomationHumidifier(){
+        return new Humidifier(message);
+    }
+
     public Humidifier getHumidifierState(){
-        return new Humidifier(gym_ID, state);
+        return new Humidifier(gym_ID, state, automation);
     }
 }

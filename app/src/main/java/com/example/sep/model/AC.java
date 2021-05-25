@@ -6,18 +6,20 @@ public class AC {
     private int state;
     private double targetTemperature;
     private String message;
+    private int automation;
 
-    public AC(int id, int gymId, int state, double targetTemperature) {
+    /*public AC(int id, int gymId, int state, double targetTemperature) {
         this.id = id;
         this.gymId = gymId;
         this.state = state;
         this.targetTemperature = targetTemperature;
-    }
+    }*/
 
-    public AC(int id, int state, double targetTemperature) {
+    public AC(int id, int state, double targetTemperature, int automation) {
         this.id = id;
         this.state = state;
         this.targetTemperature = targetTemperature;
+        this.automation = automation;
     }
 
     public AC(String message) {
@@ -65,5 +67,13 @@ public class AC {
 
     public void setTargetTemperature(double targetTemperature) {
         this.targetTemperature = targetTemperature;
+    }
+
+    public int getAutomation() {
+        return automation;
+    }
+
+    public void setAutomation(int automation) {
+        this.automation = automation;
     }
 }

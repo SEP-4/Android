@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.remorteController.RemoteControllerFragment">
+    tools:context=".ui.fragment.RemoteControllerFragment">
     <TextView
         android:layout_marginTop="100dp"
         android:layout_width="wrap_content"

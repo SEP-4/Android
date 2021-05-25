@@ -5,19 +5,21 @@ public class Humidifier {
     private int gymId;
     private int state;
     private String message;
+    private int automation;
 
     public Humidifier() {
     }
 
-    public Humidifier(int id, int gymId, int state) {
+    /*public Humidifier(int id, int gymId, int state) {
         this.id = id;
         this.gymId = gymId;
         this.state = state;
-    }
+    }*/
 
-    public Humidifier(int id, int state) {
+    public Humidifier(int id, int state, int automation) {
         this.id = id;
         this.state = state;
+        this.automation = automation;
     }
 
     public Humidifier(String message) {
@@ -54,5 +56,13 @@ public class Humidifier {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public int getAutomation() {
+        return automation;
+    }
+
+    public void setAutomation(int automation) {
+        this.automation = automation;
     }
 }

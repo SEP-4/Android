@@ -5,16 +5,18 @@ public class Window {
     private int gymId;
     private int state;
     private String message;
+    private int automation;
 
-    public Window(int id, int gymId, int state) {
+    /*public Window(int id, int gymId, int state) {
         this.id = id;
         this.gymId = gymId;
         this.state = state;
-    }
+    }*/
 
-    public Window(int id, int state) {
+    public Window(int id, int state, int automation) {
         this.id = id;
         this.state = state;
+        this.automation = automation;
     }
 
     public Window(String message) {
@@ -56,5 +58,11 @@ public class Window {
         this.message = message;
     }
 
+    public int getAutomation() {
+        return automation;
+    }
 
+    public void setAutomation(int automation) {
+        this.automation = automation;
+    }
 }

@@ -1,6 +1,5 @@
-package com.example.sep.ui.remorteController;
+package com.example.sep.ui.fragment;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.sep.R;
-import com.example.sep.model.AC;
 import com.example.sep.viewmodel.RemoteControllerViewModel;
 
 public class RemoteControllerFragment extends Fragment {
@@ -32,41 +30,40 @@ public class RemoteControllerFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-         View root = inflater.inflate(R.layout.remote_controller_fragment, container, false);
+        View root = inflater.inflate(R.layout.remote_controller_fragment, container, false);
 
-         ACSwitch = root.findViewById(R.id.acSwitch);
-         WindowsSwitch = root.findViewById(R.id.windowsSwitch);
-         HumidifierSwitch = root.findViewById(R.id.humidifierSwitch);
+        ACSwitch = root.findViewById(R.id.acSwitch);
+        WindowsSwitch = root.findViewById(R.id.windowsSwitch);
+        HumidifierSwitch = root.findViewById(R.id.humidifierSwitch);
 
-         mViewModel = new ViewModelProvider(this).get(RemoteControllerViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(RemoteControllerViewModel.class);
 
-         //--------AC--------
-         mViewModel.retrieveLastState();
-         mViewModel.getACState().observe(this.getViewLifecycleOwner(), ac -> {
-             System.out.println("```````````" +ac.getState());
+        //--------AC--------
+        mViewModel.retrieveLastState();
+        mViewModel.getACState().observe(this.getViewLifecycleOwner(), ac -> {
 
-             if (ac.getState() == 1){
-                 ACSwitch.setChecked(true);
+            if (ac.getState() == 1){
+                ACSwitch.setChecked(true);
 
-             }
-             else {
-                 ACSwitch.setChecked(false);
-             }
-         });
+            }
+            else {
+                ACSwitch.setChecked(false);
+            }
+        });
 
-         ACSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-             @Override
-             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                 if (isChecked){
-                     mViewModel.turnOnAC();
-                     Toast.makeText(getContext(), "AC is turned on!", Toast.LENGTH_SHORT).show();
-                 }
-                 else {
-                     mViewModel.turnOffAC();
-                     Toast.makeText(getContext(), "AC is turned off!", Toast.LENGTH_SHORT).show();
-                 }
-             }
-         });
+        ACSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    mViewModel.turnOnAC();
+                    Toast.makeText(getContext(), "AC is on!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    mViewModel.turnOffAC();
+                    Toast.makeText(getContext(), "AC is off!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         //--------Window--------
         mViewModel.retrieveLastStateWindow();
@@ -87,11 +84,11 @@ public class RemoteControllerFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     mViewModel.openWindow();
-                    Toast.makeText(getContext(), "Window is opened!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Windows are opened!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     mViewModel.closeWindow();
-                    Toast.makeText(getContext(), "Window is closed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Windows are closed!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -114,16 +111,16 @@ public class RemoteControllerFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     mViewModel.turnOnHumidifier();
-                    Toast.makeText(getContext(), "Humidifier is turned on!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Humidifier is on!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     mViewModel.turnOffHumidifier();
-                    Toast.makeText(getContext(), "Humidifier is turned off!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Humidifier is off!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-         return root;
+        return root;
 
     }
 

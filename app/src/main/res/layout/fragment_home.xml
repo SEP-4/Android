@@ -36,7 +36,6 @@ tools:context=".ui.fragment.HomeFragment">
         android:paddingLeft="14dp"
         android:text="Level "
         android:textSize="22sp">
-
     </TextView>
 
 
@@ -72,6 +71,18 @@ tools:context=".ui.fragment.HomeFragment">
         android:onClick="temperatureBtn"
         android:text="See more details"
         tools:ignore="OnClick" />
+
+    <Switch
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:text="Automation"
+        android:id="@+id/tmpAutomationSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="72dp"
+        android:layout_below="@+id/tmpDetailsDescriptionTextView"/>
 
 </RelativeLayout>
 
@@ -140,6 +151,17 @@ tools:context=".ui.fragment.HomeFragment">
             android:onClick="humidityBtn"
             android:text="See more details"
             tools:ignore="OnClick" />
+        <Switch
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:text="Automation"
+            android:id="@+id/humidityAutomationSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:layout_editor_absoluteX="153dp"
+            tools:layout_editor_absoluteY="72dp"
+            android:layout_below="@+id/humidityDetailsDescriptionTextView"/>
 
     </RelativeLayout>
     <RelativeLayout
@@ -208,6 +230,17 @@ tools:context=".ui.fragment.HomeFragment">
             android:onClick="co2Btn"
             android:text="See more details"
             tools:ignore="OnClick" />
+        <Switch
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:text="Automation"
+            android:id="@+id/CO2AutomationSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:layout_editor_absoluteX="153dp"
+            tools:layout_editor_absoluteY="72dp"
+            android:layout_below="@+id/co2DetailsDescriptionTextView"/>
 
     </RelativeLayout>
 </LinearLayout>
