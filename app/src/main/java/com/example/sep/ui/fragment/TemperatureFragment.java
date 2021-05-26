@@ -1,14 +1,20 @@
 package com.example.sep.ui.fragment;
 
 
+import android.app.DatePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -26,11 +32,17 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class TemperatureFragment extends Fragment {
 
     private TemperatureViewModel temperatureViewModel;
+    private Button btn;
+    private TextView dateTextView;
+    private DatePickerDialog datePicker;
+    private Calendar calendar;
+    private LineChart chart;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,7 +50,36 @@ public class TemperatureFragment extends Fragment {
                 new ViewModelProvider(this).get(TemperatureViewModel.class);
         View root = inflater.inflate(R.layout.fragment_temperature, container, false);
 
-        LineChart chart = (LineChart) root.findViewById(R.id.temperatureChart);
+        btn = root.findViewById(R.id.datePickerTemperature);
+        dateTextView = root.findViewById(R.id.dateTextViewTemperature);
+        chart = (LineChart) root.findViewById(R.id.temperatureChart);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+                datePicker = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int mYear, int mMonth, int mDayOfMonth) {
+
+                        dateTextView.setText(mDayOfMonth+ "/" + (mMonth+1) + "/" + mYear);
+                        chart();
+
+                    }
+                }, year, month, day);
+                datePicker.show();
+
+            }
+        });
+
+        return root;
+    }
+
+    public void chart(){
 
         ArrayList<Entry> data = new ArrayList<>();
         data.add(new Entry(10, 17));
@@ -72,13 +113,9 @@ public class TemperatureFragment extends Fragment {
         LineData barData = new LineData(barDataSet);
 
         chart.setData(barData);
-        chart.getDescription().setText("Bar chart temp");
+        chart.getDescription().setText("Hour");
         chart.animateY(2000);
-
-
-        return root;
     }
-
 
 }
 

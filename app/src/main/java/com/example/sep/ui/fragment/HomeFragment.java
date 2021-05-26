@@ -5,15 +5,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.sep.R;
 import com.example.sep.model.AC;
@@ -26,7 +30,9 @@ public class HomeFragment extends Fragment {
     private RemoteControllerViewModel remoteControllerViewModel;
     private TextView tmpLevelTextView, co2LevelTextView, humidityLevelTextView;
     private TextView tmpDetailsTextView, co2DetailsTextView, humidityDetailsTextView;
+    private Button btnTemperature, btnHumidity, btnCO2;
     private Switch ACSwitch, WindowsSwitch, HumidifierSwitch;
+    private NavController navController;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -117,7 +123,8 @@ public class HomeFragment extends Fragment {
                     else if(measurement.getTemperature()< 20) {
                         remoteControllerViewModel.turnOffAC();
                         Toast.makeText(getContext(), "AC is turned off!", Toast.LENGTH_SHORT).show();
-                    }else{
+                    }
+                    else{
                         remoteControllerViewModel.turnOffAutomationAC();
                         Toast.makeText(getContext(), "Automation is off!", Toast.LENGTH_SHORT).show();
                     }
@@ -168,6 +175,8 @@ public class HomeFragment extends Fragment {
                 }
             });
 
+
+
             /*String pattern = "dd/MM/yyyy";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             //String date = simpleDateFormat.format(temperature.getDate());
@@ -181,5 +190,34 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        navController = Navigation.findNavController(view);
+        btnCO2 = view.findViewById(R.id.detailsCO2);
+        btnHumidity = view.findViewById(R.id.detailsHumidity);
+        btnTemperature = view.findViewById(R.id.detailsTemperature);
+
+        btnCO2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_nav_home_to_nav_slideshow);
+            }
+        });
+
+        btnHumidity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_nav_home_to_nav_humidity);
+            }
+        });
+
+        btnTemperature.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_nav_home_to_nav_gallery);
+            }
+        });
+    }
 }

@@ -64,11 +64,11 @@ tools:context=".ui.fragment.HomeFragment">
         android:textSize="15sp" />
 
     <Button
+        android:id="@+id/detailsTemperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tmpDetailsDescriptionTextView"
         android:layout_alignEnd="@id/tmpDetailsDescriptionTextView"
-        android:onClick="temperatureBtn"
         android:text="See more details"
         tools:ignore="OnClick" />
 
@@ -144,11 +144,11 @@ tools:context=".ui.fragment.HomeFragment">
             android:textSize="15sp" />
 
         <Button
+            android:id="@+id/detailsHumidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/humidityDetailsDescriptionTextView"
             android:layout_alignEnd="@id/humidityDetailsDescriptionTextView"
-            android:onClick="humidityBtn"
             android:text="See more details"
             tools:ignore="OnClick" />
         <Switch
@@ -223,11 +223,11 @@ tools:context=".ui.fragment.HomeFragment">
             android:textSize="15sp" />
 
         <Button
+            android:id="@+id/detailsCO2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/co2DetailsDescriptionTextView"
             android:layout_alignEnd="@id/co2DetailsDescriptionTextView"
-            android:onClick="co2Btn"
             android:text="See more details"
             tools:ignore="OnClick" />
         <Switch
