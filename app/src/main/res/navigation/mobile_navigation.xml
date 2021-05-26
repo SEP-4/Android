@@ -27,4 +27,9 @@
         android:name="com.example.sep.ui.fragment.RemoteControllerFragment"
         android:label="Controller"
         tools:layout="@layout/remote_controller_fragment" />
+    <fragment
+        android:id="@+id/nav_humidity"
+        android:name="com.example.sep.ui.fragment.HumidityFragment"
+        android:label="Humidity"
+        tools:layout="@layout/fragment_humidity" />
 </navigation>
