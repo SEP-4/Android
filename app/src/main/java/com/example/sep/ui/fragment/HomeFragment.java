@@ -55,11 +55,13 @@ public class HomeFragment extends Fragment {
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.retrieveLastTemperature();
-        homeViewModel.getLastTemperature().observe(this.getViewLifecycleOwner(), measurement -> {
 
-            tmpLevelTextView.setText(String.valueOf(measurement.getTemperature() + "C°"));
-            co2LevelTextView.setText(String.valueOf(measurement.getcO2Level() + "ppm"));
-            humidityLevelTextView.setText(String.valueOf(measurement.getHumidity() + "%"));
+
+
+        homeViewModel.getLastTemperature().observe(this.getViewLifecycleOwner(), measurement -> {
+            tmpLevelTextView.setText(measurement.getTemperature() + "C°");
+            co2LevelTextView.setText(measurement.getcO2Level() + "ppm");
+            humidityLevelTextView.setText(measurement.getHumidity() + "%");
             tmpDetailsTextView.setText("20-22C°");
             co2DetailsTextView.setText("400 - 1000ppm");
             humidityDetailsTextView.setText("40-60%");
@@ -68,45 +70,37 @@ public class HomeFragment extends Fragment {
                 NotificationChannel channel = new NotificationChannel("My notification", "My notification", NotificationManager.IMPORTANCE_DEFAULT);
                 NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
                 notificationManager.createNotificationChannel(channel);
-
             }
 
-            if(measurement.getTemperature()< 20 || measurement.getTemperature() > 22 ){
+            if (measurement.getTemperature() < 20 || measurement.getTemperature() > 22){
                 tmpLevelTextView.setTextColor(Color.RED);
                 tmpDetailsTextView.setTextColor(Color.RED);
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getActivity(), "My notification")
-                        .setSmallIcon(R.drawable.ic_message)
-                        .setContentTitle("Temperature warning.")
-                        .setContentText("WARNING!!! The room temperature is either too low or high.")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this.getActivity());
-                notificationManager.notify(12, builder.build());
+                String temperatureStatus = null;
+                if (measurement.getTemperature() < 20)
+                    temperatureStatus = "low";
+                else if (measurement.getTemperature() > 22)
+                    temperatureStatus = "high";
 
+                sendNotification("Temperature warning!", "The room temperature is too " + temperatureStatus + ".");
             }
-            if(measurement.getcO2Level() > 1000 ){
+            if (measurement.getcO2Level() > 1000 ) {
                 co2LevelTextView.setTextColor(Color.RED);
                 co2DetailsTextView.setTextColor(Color.RED);
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getActivity(), "My notification")
-                        .setSmallIcon(R.drawable.ic_message)
-                        .setContentTitle("CO2 warning.")
-                        .setContentText("WARNING!!! The CO2 level is too low.")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this.getActivity());
-                notificationManager.notify(13, builder.build());
+                sendNotification("CO2 level warning!","The CO2 level is too low.");
             }
             if(measurement.getHumidity()> 60 || measurement.getHumidity() < 40 ){
                 humidityLevelTextView.setTextColor(Color.RED);
                 humidityDetailsTextView.setTextColor(Color.RED);
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getActivity(), "My notification")
-                        .setSmallIcon(R.drawable.ic_message)
-                        .setContentTitle("Temperature warning.")
-                        .setContentText("WARNING!!! The humidity percentage is either too low or high. ")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this.getActivity());
-                notificationManager.notify(14, builder.build());
+                String humidityStatus = null;
+                if (measurement.getTemperature() > 60)
+                    humidityStatus = "high";
+                else if (measurement.getTemperature() < 40)
+                    humidityStatus = "low";
+
+                sendNotification("Humidity percentage warning!","The humidity percentage is too " + humidityStatus + ".");
             }
 
             remoteControllerViewModel.retrieveLastState();
@@ -219,6 +213,17 @@ public class HomeFragment extends Fragment {
 
 
         return root;
+    }
+
+    private void sendNotification(String title, String text) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getActivity(), "My notification")
+                .setSmallIcon(R.drawable.ic_message)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this.getActivity());
+        notificationManager.notify(12, builder.build());
     }
 
 
