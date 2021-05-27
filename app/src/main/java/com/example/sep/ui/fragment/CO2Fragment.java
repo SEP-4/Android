@@ -11,13 +11,13 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.sep.R;
+import com.example.sep.model.AverageData;
 import com.example.sep.viewmodel.CO2ViewModel;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -27,6 +27,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class CO2Fragment extends Fragment {
 
@@ -36,6 +37,12 @@ public class CO2Fragment extends Fragment {
     private DatePickerDialog datePicker;
     private Calendar calendar;
     private LineChart chart;
+    String averageCO2 = null;
+    ArrayList<Entry> data = new ArrayList<>();
+    ArrayList<Integer> data2 = new ArrayList<>();
+    LineDataSet barDataSet;
+    LineData barData;
+    float x = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -74,27 +81,44 @@ public class CO2Fragment extends Fragment {
 
     public void chart(){
 
-        ArrayList<Entry> data = new ArrayList<>();
-        data.add(new Entry(10, 17));
-        data.add(new Entry(11, 18));
-        data.add(new Entry(12, 19));
-        data.add(new Entry(13, 21));
-        data.add(new Entry(14, 21));
-        data.add(new Entry(15, 21));
-        data.add(new Entry(16, 22));
-        data.add(new Entry(17, 22));
-        data.add(new Entry(18, 22));
+      //getList();
+
+        ArrayList<AverageData> arrayList = new ArrayList<>();
+        CO2ViewModel.retrieveAverageData();
+        CO2ViewModel.getAverageData().observe(this, new Observer<List<AverageData>>() {
+            @Override
+            public void onChanged(List<AverageData> averageData) {
+
+                averageCO2 = averageData.get(15).getAverageCO2Level();
+                System.out.println("CO222:" + averageCO2);
+                getCO2(averageCO2);
+            }
+        });
+
+
+
+        data.add(new Entry(10, x ));
         data.add(new Entry(19, 23));
         data.add(new Entry(20, 21));
         data.add(new Entry(21, 21));
         data.add(new Entry(22, 20));
 
-        LineDataSet barDataSet = new LineDataSet(data, "Temperature data");
+
+        barDataSet = new LineDataSet (data, "Chart");
+
         barDataSet.setColors(R.color.green_700);
         barDataSet.setDrawValues(false);
         barDataSet.setLineWidth(6f);
         barDataSet.setCircleColors(R.color.black);
         barDataSet.setCircleRadius(5f);
+
+        barData = new LineData(barDataSet);
+
+
+        chart.setData(barData);
+        chart.getDescription().setText("Hour");
+        chart.animateY(2000);
+
 
         chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chart.getAxisLeft().setDrawGridLines(false);
@@ -103,10 +127,34 @@ public class CO2Fragment extends Fragment {
         chart.getAxisRight().setEnabled(false);
 
 
-        LineData barData = new LineData(barDataSet);
 
-        chart.setData(barData);
-        chart.getDescription().setText("Hour");
-        chart.animateY(2000);
+    }
+
+    public void getCO2(String co2){
+        x = Float.parseFloat(co2);
+        System.out.println("XXXXXX: " + x);
+    }
+
+    public ArrayList<AverageData> getList(){
+        ArrayList<AverageData> arrayList = new ArrayList<>();
+        CO2ViewModel.retrieveAverageData();
+        CO2ViewModel.getAverageData().observe(this, new Observer<List<AverageData>>() {
+            @Override
+            public void onChanged(List<AverageData> averageData) {
+
+                for (AverageData mAveragedata: averageData) {
+                    arrayList.add(mAveragedata);
+                }
+                //averageCO2 = averageData.get(15).getAverageCO2Level();
+                System.out.println("AverageCO2Level: " + averageData.get(15).getAverageCO2Level());
+
+
+                averageData.size();
+                System.out.println("AverageData List:" + averageData);
+            }
+        });
+
+        System.out.println("ArrayList: " + arrayList.size());
+        return arrayList;
     }
 }

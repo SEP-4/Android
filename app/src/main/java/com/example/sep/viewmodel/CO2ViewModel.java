@@ -4,16 +4,24 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class CO2ViewModel extends ViewModel {
+import com.example.sep.model.AverageData;
+import com.example.sep.repository.AverageDataRepository;
 
-    private MutableLiveData<String> mText;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CO2ViewModel extends ViewModel {
+    private AverageDataRepository repository;
 
     public CO2ViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        repository = AverageDataRepository.getInstance();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<AverageData>> getAverageData(){
+        return repository.getAverageData();
+    }
+
+    public void retrieveAverageData(){
+        repository.retrieveAverageData();
     }
 }
