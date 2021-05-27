@@ -19,7 +19,9 @@ import retrofit2.Response;
 public class AverageDataRepository {
     private static AverageDataRepository instance;
     private MutableLiveData<List<AverageData>> averageDataMutableLiveData;
-    //private ArrayList<AverageDataResponse> averageDataArrayList = new ArrayList<>();
+
+
+    private List<AverageData> averageDataList = new ArrayList<>();
 
     private AverageDataRepository() {
         averageDataMutableLiveData = new MutableLiveData<>();
@@ -32,8 +34,11 @@ public class AverageDataRepository {
         return instance;
     }
 
+
     public LiveData<List<AverageData>> getAverageData(){
+        averageDataList.clear();
         retrieveAverageData();
+        averageDataMutableLiveData.setValue(averageDataList);
         return averageDataMutableLiveData;
     }
 
@@ -44,14 +49,13 @@ public class AverageDataRepository {
             @Override
             public void onResponse(Call<List<AverageData>> call, Response<List<AverageData>> response) {
 
-                ArrayList<AverageData> averageDataArrayList = new ArrayList<>();
+                averageDataList = new ArrayList<>();
 
-                for (AverageData averageData: response.body()) {
-                    averageDataArrayList.add( averageData);
-                }
+                averageDataList.addAll(response.body());
 
-                averageDataMutableLiveData.postValue(averageDataArrayList);
+                System.out.println("LISSSS: " + averageDataList);
 
+                averageDataMutableLiveData.postValue(averageDataList);
             }
 
             @Override

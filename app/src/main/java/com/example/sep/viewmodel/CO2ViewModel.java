@@ -11,17 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CO2ViewModel extends ViewModel {
-    private AverageDataRepository repository;
+   private AverageDataRepository repository;
 
-    public CO2ViewModel() {
-        repository = AverageDataRepository.getInstance();
-    }
+
+    private LiveData<List<AverageData>> listMutableLiveData;
+
 
     public LiveData<List<AverageData>> getAverageData(){
-        return repository.getAverageData();
+
+        return listMutableLiveData;
     }
 
     public void retrieveAverageData(){
-        repository.retrieveAverageData();
+
+        listMutableLiveData = AverageDataRepository.getInstance().getAverageData();
+
     }
 }

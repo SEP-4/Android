@@ -43,6 +43,8 @@ public class CO2Fragment extends Fragment {
     LineDataSet barDataSet;
     LineData barData;
     float x = 0;
+    ArrayList<String> values = new ArrayList<>();
+    ArrayList<Integer> valuesX = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,8 +68,8 @@ public class CO2Fragment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int mYear, int mMonth, int mDayOfMonth) {
 
-                        dateTextView.setText(mDayOfMonth+ "/" + (mMonth+1) + "/" + mYear);
-                        chart();
+                        dateTextView.setText(mYear+ "-" +(mMonth+1) + "-"+mDayOfMonth);
+                        //chart();
 
                     }
                 }, year, month, day);
@@ -76,32 +78,36 @@ public class CO2Fragment extends Fragment {
             }
         });
 
-        return root;
-    }
 
-    public void chart(){
-
-      //getList();
-
-        ArrayList<AverageData> arrayList = new ArrayList<>();
         CO2ViewModel.retrieveAverageData();
-        CO2ViewModel.getAverageData().observe(this, new Observer<List<AverageData>>() {
+        CO2ViewModel.getAverageData().observe(getViewLifecycleOwner(), new Observer<List<AverageData>>() {
             @Override
             public void onChanged(List<AverageData> averageData) {
 
-                averageCO2 = averageData.get(15).getAverageCO2Level();
-                System.out.println("CO222:" + averageCO2);
-                getCO2(averageCO2);
+                for (int i=0; i<=averageData.size()-1; i++){
+                    values.add(averageData.get(i).getAverageCO2Level());
+                    valuesX.add(averageData.get(i).getHour());
+                }
+
+                chart(values);
             }
         });
 
 
+        return root;
+    }
 
-        data.add(new Entry(10, x ));
-        data.add(new Entry(19, 23));
-        data.add(new Entry(20, 21));
-        data.add(new Entry(21, 21));
-        data.add(new Entry(22, 20));
+    public void chart(ArrayList<String> arrayList){
+
+
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).equals("NaN")){
+                data.add(new Entry(valuesX.get(i), 0));
+            }
+            else {
+                data.add(new Entry(valuesX.get(i), Float.parseFloat(arrayList.get(i))));
+            }
+        }
 
 
         barDataSet = new LineDataSet (data, "Chart");
@@ -130,31 +136,7 @@ public class CO2Fragment extends Fragment {
 
     }
 
-    public void getCO2(String co2){
-        x = Float.parseFloat(co2);
-        System.out.println("XXXXXX: " + x);
-    }
-
-    public ArrayList<AverageData> getList(){
-        ArrayList<AverageData> arrayList = new ArrayList<>();
-        CO2ViewModel.retrieveAverageData();
-        CO2ViewModel.getAverageData().observe(this, new Observer<List<AverageData>>() {
-            @Override
-            public void onChanged(List<AverageData> averageData) {
-
-                for (AverageData mAveragedata: averageData) {
-                    arrayList.add(mAveragedata);
-                }
-                //averageCO2 = averageData.get(15).getAverageCO2Level();
-                System.out.println("AverageCO2Level: " + averageData.get(15).getAverageCO2Level());
 
 
-                averageData.size();
-                System.out.println("AverageData List:" + averageData);
-            }
-        });
 
-        System.out.println("ArrayList: " + arrayList.size());
-        return arrayList;
-    }
 }
