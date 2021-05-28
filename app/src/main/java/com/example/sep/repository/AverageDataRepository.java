@@ -35,16 +35,16 @@ public class AverageDataRepository {
     }
 
 
-    public LiveData<List<AverageData>> getAverageData(){
+    public LiveData<List<AverageData>> getAverageData(String date){
         averageDataList.clear();
-        retrieveAverageData();
+        retrieveAverageData(date);
         averageDataMutableLiveData.setValue(averageDataList);
         return averageDataMutableLiveData;
     }
 
-    public void retrieveAverageData(){
+    public void retrieveAverageData(String date){
         IAverageDataService service = ServiceGenerator.getAverageData();
-        Call<List<AverageData>> call = service.getAverageMeasurement();
+        Call<List<AverageData>> call = service.getAverageMeasurement(date);
         call.enqueue(new Callback<List<AverageData>>() {
             @Override
             public void onResponse(Call<List<AverageData>> call, Response<List<AverageData>> response) {
@@ -53,7 +53,6 @@ public class AverageDataRepository {
 
                 averageDataList.addAll(response.body());
 
-                System.out.println("LISSSS: " + averageDataList);
 
                 averageDataMutableLiveData.postValue(averageDataList);
             }

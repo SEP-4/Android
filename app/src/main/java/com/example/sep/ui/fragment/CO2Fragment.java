@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.sep.R;
 import com.example.sep.model.AverageData;
-import com.example.sep.viewmodel.CO2ViewModel;
+import com.example.sep.viewmodel.AverageDataViewModel;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -31,30 +31,27 @@ import java.util.List;
 
 public class CO2Fragment extends Fragment {
 
-    private com.example.sep.viewmodel.CO2ViewModel CO2ViewModel;
+    private AverageDataViewModel AverageDataViewModel;
     private Button btn;
     private TextView dateTextView;
     private DatePickerDialog datePicker;
     private Calendar calendar;
     private LineChart chart;
-    String averageCO2 = null;
     ArrayList<Entry> data = new ArrayList<>();
-    ArrayList<Integer> data2 = new ArrayList<>();
     LineDataSet barDataSet;
     LineData barData;
-    float x = 0;
     ArrayList<String> values = new ArrayList<>();
     ArrayList<Integer> valuesX = new ArrayList<>();
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        CO2ViewModel = new ViewModelProvider(this).get(CO2ViewModel.class);
+        AverageDataViewModel = new ViewModelProvider(this).get(AverageDataViewModel.class);
         View root = inflater.inflate(R.layout.fragment_co2, container, false);
 
         btn = root.findViewById(R.id.datePickerCO2);
         dateTextView = root.findViewById(R.id.dateTextViewCO2);
         chart = (LineChart) root.findViewById(R.id.co2Chart);
-
 
         btn.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -67,10 +64,11 @@ public class CO2Fragment extends Fragment {
                 datePicker = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int mYear, int mMonth, int mDayOfMonth) {
-
+                        values.clear();
+                        valuesX.clear();
+                        data.clear();
                         dateTextView.setText(mYear+ "-" +(mMonth+1) + "-"+mDayOfMonth);
-                        //chart();
-
+                        AverageDataViewModel.retrieveAverageData(dateTextView.getText().toString());
                     }
                 }, year, month, day);
                 datePicker.show();
@@ -78,28 +76,28 @@ public class CO2Fragment extends Fragment {
             }
         });
 
+        calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        dateTextView.setText(year+"-"+(month+1)+"-"+day);
+        AverageDataViewModel.retrieveAverageData(year+"-"+(month+1)+"-"+day);
 
-        CO2ViewModel.retrieveAverageData();
-        CO2ViewModel.getAverageData().observe(getViewLifecycleOwner(), new Observer<List<AverageData>>() {
+
+        AverageDataViewModel.getAverageData().observe(getViewLifecycleOwner(), new Observer<List<AverageData>>() {
             @Override
             public void onChanged(List<AverageData> averageData) {
-
                 for (int i=0; i<=averageData.size()-1; i++){
                     values.add(averageData.get(i).getAverageCO2Level());
                     valuesX.add(averageData.get(i).getHour());
                 }
-
                 chart(values);
             }
         });
-
-
         return root;
     }
 
     public void chart(ArrayList<String> arrayList){
-
-
         for (int i = 0; i < arrayList.size(); i++) {
             if (arrayList.get(i).equals("NaN")){
                 data.add(new Entry(valuesX.get(i), 0));

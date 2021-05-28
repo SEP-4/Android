@@ -7,42 +7,45 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.sep.R;
-import com.example.sep.viewmodel.HumidityViewModel;
-import com.example.sep.viewmodel.TemperatureViewModel;
+import com.example.sep.model.AverageData;
+import com.example.sep.viewmodel.AverageDataViewModel;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 public class HumidityFragment extends Fragment {
-    private HumidityViewModel viewModel;
+    private AverageDataViewModel AverageDataViewModel;
     private Button btn;
     private TextView dateTextView;
     private DatePickerDialog datePicker;
     private Calendar calendar;
     private LineChart chart;
+    ArrayList<Entry> data = new ArrayList<>();
+    LineDataSet barDataSet;
+    LineData barData;
+    ArrayList<String> values = new ArrayList<>();
+    ArrayList<Integer> valuesX = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        viewModel =
-                new ViewModelProvider(this).get(HumidityViewModel.class);
+        AverageDataViewModel = new ViewModelProvider(this).get(AverageDataViewModel.class);
         View root = inflater.inflate(R.layout.fragment_humidity, container, false);
 
         btn = root.findViewById(R.id.datePickerHumidity);
@@ -62,8 +65,11 @@ public class HumidityFragment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int mYear, int mMonth, int mDayOfMonth) {
 
-                        dateTextView.setText(mDayOfMonth+ "/" + (mMonth+1) + "/" + mYear);
-                        chart();
+                        values.clear();
+                        valuesX.clear();
+                        data.clear();
+                        dateTextView.setText(mYear+ "-" +(mMonth+1) + "-"+mDayOfMonth);
+                        AverageDataViewModel.retrieveAverageData(dateTextView.getText().toString());
 
                     }
                 }, year, month, day);
@@ -72,35 +78,53 @@ public class HumidityFragment extends Fragment {
             }
         });
 
+        calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        dateTextView.setText(year+"-"+(month+1)+"-"+day);
+        AverageDataViewModel.retrieveAverageData(year+"-"+(month+1)+"-"+day);
 
-
+        AverageDataViewModel.getAverageData().observe(getViewLifecycleOwner(), new Observer<List<AverageData>>() {
+            @Override
+            public void onChanged(List<AverageData> averageData) {
+                for (int i=0; i<=averageData.size()-1; i++){
+                    values.add(averageData.get(i).getAverageHumidity());
+                    valuesX.add(averageData.get(i).getHour());
+                }
+                chart(values);
+            }
+        });
 
         return root;
     }
 
-    public void chart(){
+    public void chart(ArrayList<String> arrayList){
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).equals("NaN")){
+                data.add(new Entry(valuesX.get(i), 0));
+            }
+            else {
+                data.add(new Entry(valuesX.get(i), Float.parseFloat(arrayList.get(i))));
+            }
+        }
 
-        ArrayList<Entry> data = new ArrayList<>();
-        data.add(new Entry(10, 17));
-        data.add(new Entry(11, 18));
-        data.add(new Entry(12, 19));
-        data.add(new Entry(13, 21));
-        data.add(new Entry(14, 21));
-        data.add(new Entry(15, 21));
-        data.add(new Entry(16, 22));
-        data.add(new Entry(17, 22));
-        data.add(new Entry(18, 22));
-        data.add(new Entry(19, 23));
-        data.add(new Entry(20, 21));
-        data.add(new Entry(21, 21));
-        data.add(new Entry(22, 20));
 
-        LineDataSet barDataSet = new LineDataSet(data, "Temperature data");
+        barDataSet = new LineDataSet (data, "Chart");
+
         barDataSet.setColors(R.color.green_700);
         barDataSet.setDrawValues(false);
         barDataSet.setLineWidth(6f);
         barDataSet.setCircleColors(R.color.black);
         barDataSet.setCircleRadius(5f);
+
+        barData = new LineData(barDataSet);
+
+
+        chart.setData(barData);
+        chart.getDescription().setText("Hour");
+        chart.animateY(2000);
+
 
         chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chart.getAxisLeft().setDrawGridLines(false);
@@ -109,10 +133,6 @@ public class HumidityFragment extends Fragment {
         chart.getAxisRight().setEnabled(false);
 
 
-        LineData barData = new LineData(barDataSet);
 
-        chart.setData(barData);
-        chart.getDescription().setText("Hour");
-        chart.animateY(2000);
     }
 }

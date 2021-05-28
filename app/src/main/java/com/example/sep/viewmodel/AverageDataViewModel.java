@@ -10,7 +10,7 @@ import com.example.sep.repository.AverageDataRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CO2ViewModel extends ViewModel {
+public class AverageDataViewModel extends ViewModel {
    private AverageDataRepository repository;
 
 
@@ -22,9 +22,9 @@ public class CO2ViewModel extends ViewModel {
         return listMutableLiveData;
     }
 
-    public void retrieveAverageData(){
+    public void retrieveAverageData(String date){
 
-        listMutableLiveData = AverageDataRepository.getInstance().getAverageData();
+        listMutableLiveData = AverageDataRepository.getInstance().getAverageData(date);
 
     }
 }

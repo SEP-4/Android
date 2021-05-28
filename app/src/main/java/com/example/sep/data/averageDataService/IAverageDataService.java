@@ -8,8 +8,9 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface IAverageDataService {
-    @GET("measurement/2021-05-24")
-    Call<List<AverageData>> getAverageMeasurement();
+    @GET("measurement/{date}")
+    Call<List<AverageData>> getAverageMeasurement(@Path("date") String date);
 }
