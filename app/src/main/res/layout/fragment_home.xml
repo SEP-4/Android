@@ -242,5 +242,6 @@ tools:context=".ui.fragment.HomeFragment">
             tools:layout_editor_absoluteY="72dp"
             android:layout_below="@+id/co2DetailsDescriptionTextView"/>
 
+
     </RelativeLayout>
 </LinearLayout>
