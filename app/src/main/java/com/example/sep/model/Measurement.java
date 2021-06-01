@@ -10,8 +10,6 @@ public class Measurement {
     private double cO2Level;
     private String date;
     private Time time;
-    private boolean isExpandable;
-    private int imageId;
 
     public Measurement(int measurement_ID, int gym_ID, double temperature, double humidity, double cO2Level, String date, Time time) {
         this.measurement_ID = measurement_ID;

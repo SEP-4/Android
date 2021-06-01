@@ -2,7 +2,6 @@ package com.example.sep.model;
 
 public class Gym {
     private int gym_ID;
-    //private int climateSettingId;
     private String address;
     private String contact;
     private int postCode;

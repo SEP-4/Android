@@ -2,7 +2,6 @@ package com.example.sep.model;
 
 public class Humidifier {
     private int id;
-    private int gymId;
     private int state;
     private String message;
     private int automation;

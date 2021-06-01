@@ -2,7 +2,6 @@ package com.example.sep.model;
 
 public class AC {
     private int id;
-    private int gymId;
     private int state;
     private double targetTemperature;
     private String message;
