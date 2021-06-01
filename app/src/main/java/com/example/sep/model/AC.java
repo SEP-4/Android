@@ -31,43 +31,12 @@ public class AC {
         this.id = id;
     }
 
-    public int getGymId() {
-        return gymId;
-    }
-
-    public void setGymId(int gymId) {
-        this.gymId = gymId;
-    }
-
     public int getState() {
         return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
-    public double getTargetTemperature() {
-        return targetTemperature;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public void setTargetTemperature(double targetTemperature) {
-        this.targetTemperature = targetTemperature;
     }
 
     public int getAutomation() {
         return automation;
     }
 
-    public void setAutomation(int automation) {
-        this.automation = automation;
-    }
 }

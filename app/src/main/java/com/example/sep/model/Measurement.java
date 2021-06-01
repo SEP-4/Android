@@ -30,32 +30,14 @@ public class Measurement {
         return temperature;
     }
 
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
-    }
 
     public double getHumidity() {
         return humidity;
-    }
-
-    public void setHumidity(double humidity) {
-        this.humidity = humidity;
     }
 
     public double getcO2Level() {
         return cO2Level;
     }
 
-    public void setcO2Level(double cO2Level) {
-        this.cO2Level = cO2Level;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
 
 }
