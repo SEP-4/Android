@@ -61,7 +61,7 @@ public class MainActivityHome extends AppCompatActivity {
 
     public void call(){
         Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
-        phoneIntent.setData(Uri.parse("tel: +4569696969"));
+        phoneIntent.setData(Uri.parse("tel: +4565666768"));
         startActivity(phoneIntent);
 
     }

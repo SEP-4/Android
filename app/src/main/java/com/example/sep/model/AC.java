@@ -8,12 +8,6 @@ public class AC {
     private String message;
     private int automation;
 
-    /*public AC(int id, int gymId, int state, double targetTemperature) {
-        this.id = id;
-        this.gymId = gymId;
-        this.state = state;
-        this.targetTemperature = targetTemperature;
-    }*/
 
     public AC(int id, int state, double targetTemperature, int automation) {
         this.id = id;

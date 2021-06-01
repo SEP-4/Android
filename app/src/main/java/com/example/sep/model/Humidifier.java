@@ -10,12 +10,6 @@ public class Humidifier {
     public Humidifier() {
     }
 
-    /*public Humidifier(int id, int gymId, int state) {
-        this.id = id;
-        this.gymId = gymId;
-        this.state = state;
-    }*/
-
     public Humidifier(int id, int state, int automation) {
         this.id = id;
         this.state = state;

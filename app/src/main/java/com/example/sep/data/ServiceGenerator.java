@@ -36,8 +36,6 @@ public class ServiceGenerator {
                     .create(IMeasurementService.class);
 
         }
-        System.out.println("tmpService: " + measurementService);
-        System.out.println("Network" + NetworkSecurityPolicy.getInstance().isCleartextTrafficPermitted());
         return measurementService;
     }
 

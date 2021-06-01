@@ -69,6 +69,7 @@ tools:context=".ui.fragment.HomeFragment">
         android:layout_height="wrap_content"
         android:layout_below="@+id/tmpDetailsDescriptionTextView"
         android:layout_alignEnd="@id/tmpDetailsDescriptionTextView"
+        android:layout_marginRight="5dp"
         android:text="See more details"
         tools:ignore="OnClick" />
 
@@ -149,6 +150,7 @@ tools:context=".ui.fragment.HomeFragment">
             android:layout_height="wrap_content"
             android:layout_below="@+id/humidityDetailsDescriptionTextView"
             android:layout_alignEnd="@id/humidityDetailsDescriptionTextView"
+            android:layout_marginRight="5dp"
             android:text="See more details"
             tools:ignore="OnClick" />
         <Switch
@@ -229,6 +231,7 @@ tools:context=".ui.fragment.HomeFragment">
             android:layout_below="@+id/co2DetailsDescriptionTextView"
             android:layout_alignEnd="@id/co2DetailsDescriptionTextView"
             android:text="See more details"
+            android:layout_marginRight="5dp"
             tools:ignore="OnClick" />
         <Switch
             android:layout_marginTop="10dp"

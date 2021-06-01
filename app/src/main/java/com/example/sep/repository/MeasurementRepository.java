@@ -31,7 +31,7 @@ public class MeasurementRepository {
     }
 
     public LiveData<Measurement> getLastMeasurement() {
-        System.out.println("RepositoryGetLastTmp: " + lastMeasurement);
+        retrieveLastMeasurement();
         return lastMeasurement;
     }
     public void retrieveLastMeasurement() {
@@ -55,3 +55,5 @@ public class MeasurementRepository {
         });
     }
 }
+
+

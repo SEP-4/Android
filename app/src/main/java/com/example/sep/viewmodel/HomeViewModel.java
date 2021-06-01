@@ -9,16 +9,20 @@ import com.example.sep.repository.MeasurementRepository;
 public class HomeViewModel extends ViewModel {
     private MeasurementRepository repository;
 
+    private LiveData<Measurement> measurementLiveData;
+
     public HomeViewModel() {
         repository = MeasurementRepository.getInstance();
     }
 
     public LiveData<Measurement> getLastTemperature()
     {
-        return repository.getLastMeasurement();
+        return measurementLiveData;
     }
 
     public void retrieveLastTemperature() {
-        repository.retrieveLastMeasurement();
+        measurementLiveData = MeasurementRepository.getInstance().getLastMeasurement();
     }
 }
+
+

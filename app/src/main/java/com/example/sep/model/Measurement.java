@@ -26,35 +26,6 @@ public class Measurement {
     public Measurement() {
     }
 
-    public int getImageId() {
-        return imageId;
-    }
-
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
-
-    public int getMeasurement_ID() {
-        return measurement_ID;
-    }
-
-    public void setMeasurement_ID(int measurement_ID) {
-        this.measurement_ID = measurement_ID;
-    }
-
-    public int getGym_ID() {
-        return gym_ID;
-    }
-
-    public void setGym_ID(int gym_ID) {
-        this.gym_ID = gym_ID;
-    }
-
     public double getTemperature() {
         return temperature;
     }

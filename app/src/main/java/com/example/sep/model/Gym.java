@@ -23,68 +23,8 @@ public class Gym {
         this.password = password;
     }
 
-
-//    public int getClimateSettingId() {
-//        return climateSettingId;
-//    }
-//
-//    public void setClimateSettingId(int climateSettingId) {
-//        this.climateSettingId = climateSettingId;
-//    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    public int getPostCode() {
-        return postCode;
-    }
-
-    public void setPostCode(int postCode) {
-        this.postCode = postCode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public int getGym_ID() {
-        return gym_ID;
-    }
-
-    public void setGym_ID(int gym_ID) {
-        this.gym_ID = gym_ID;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

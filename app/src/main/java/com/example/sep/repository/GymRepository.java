@@ -7,11 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.sep.data.ServiceGenerator;
 import com.example.sep.data.gymService.GymResponse;
 import com.example.sep.data.gymService.IGymService;
-import com.example.sep.model.Employee;
 import com.example.sep.model.Gym;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

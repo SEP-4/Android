@@ -31,7 +31,7 @@
             <item
                 android:id="@+id/nav_call"
                 android:icon="@drawable/ic_call"
-                android:title="+45 69 69 69 69" />
+                android:title="+45 65 66 67 68" />
         </menu>
     </item>
 </menu>

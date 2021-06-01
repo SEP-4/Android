@@ -7,3 +7,6 @@ public interface IMeasurementService {
     @GET("measurement")
     Call<MeasurementResponse> getLastMeasurement();
 }
+
+
+
