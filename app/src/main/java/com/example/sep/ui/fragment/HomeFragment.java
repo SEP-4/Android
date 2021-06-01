@@ -1,6 +1,5 @@
 package com.example.sep.ui.fragment;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.graphics.Color;
@@ -211,15 +210,6 @@ public class HomeFragment extends Fragment {
                 }
             });
 
-
-
-            /*String pattern = "dd/MM/yyyy";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-            //String date = simpleDateFormat.format(temperature.getDate());
-            tmpTextView.setText(String.valueOf(temperature.getTime()));
-            System.out.println("tmppp:" + temperature.toString());
-
-            System.out.println();*/
         });
 
 
