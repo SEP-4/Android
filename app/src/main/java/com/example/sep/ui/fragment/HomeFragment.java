@@ -61,11 +61,11 @@ public class HomeFragment extends Fragment {
 
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.retrieveLastTemperature();
+        homeViewModel.retrieveLastMeasurement();
 
 
 
-        homeViewModel.getLastTemperature().observe(this.getViewLifecycleOwner(), measurement -> {
+        homeViewModel.getLastMeasurement().observe(this.getViewLifecycleOwner(), measurement -> {
             tmpLevelTextView.setText(measurement.getTemperature() + "C°");
             co2LevelTextView.setText(measurement.getcO2Level() + "ppm");
             humidityLevelTextView.setText(measurement.getHumidity() + "%");

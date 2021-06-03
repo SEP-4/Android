@@ -15,12 +15,12 @@ public class HomeViewModel extends ViewModel {
         repository = MeasurementRepository.getInstance();
     }
 
-    public LiveData<Measurement> getLastTemperature()
+    public LiveData<Measurement> getLastMeasurement()
     {
         return measurementLiveData;
     }
 
-    public void retrieveLastTemperature() {
+    public void retrieveLastMeasurement() {
         measurementLiveData = MeasurementRepository.getInstance().getLastMeasurement();
     }
 }

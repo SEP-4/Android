@@ -1,9 +1,6 @@
 package com.example.sep.data.averageDataService;
 
-import com.example.sep.data.measurementService.MeasurementResponse;
 import com.example.sep.model.AverageData;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

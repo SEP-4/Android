@@ -8,8 +8,4 @@ public interface IGymService {
     @GET("gym")
     Call<GymResponse> getGymsByEmail(@Query("email") String email);
 
-
-    //@POST("api/v2/employees/{employee}")
-    //Call addEmployee(@Path("employee")Employee employee);
-
 }
